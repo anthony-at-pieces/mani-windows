@@ -64,6 +64,24 @@ go install github.com/alajmo/mani@latest
 </details>
 
 <details>
+<summary><b>Install Script (build + add to PATH)</b></summary>
+
+```powershell
+.\scripts\install.ps1
+```
+
+Builds `dist\mani.exe`, copies it to `%LOCALAPPDATA%\Programs\mani`, and adds that directory to your user PATH. Open a new shell after running to pick up the PATH change.
+
+Flags: `-InstallDir <path>` (custom location), `-SkipBuild` (use an existing `dist\mani.exe`), `-NoPath` (skip PATH modification), `-Version <ver>` (passed through to the build).
+
+If PowerShell blocks the script with an execution-policy error, run it as:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install.ps1
+```
+</details>
+
+<details>
 <summary><b>Building From Source</b></summary>
 
 1. Clone the repo

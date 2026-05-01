@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "dev",
+    [string]$Version = "0.2.0",
     [string]$Output = "dist\mani.exe"
 )
 
