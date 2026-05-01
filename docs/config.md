@@ -21,10 +21,10 @@ import:
   - ./some-dir/mani.yaml
 
 # Shell used for commands
-# If you use any other program than bash, zsh, sh, node, and python
-# then you have to provide the command flag if you want the command-line string evaluted
-# For instance: bash -c
-shell: bash
+# Defaults to Windows PowerShell 5+
+# If you use pwsh, cmd, node, or python, mani adds the standard command flag.
+# For any other shell, provide the full command flag yourself.
+shell: powershell -NoProfile -Command
 
 # If set to true, mani will override the URL of any existing remote
 # and remove remotes not found in the config
@@ -93,7 +93,7 @@ projects:
       branch: main
 
       # Shell command substitution
-      date: $(date -u +"%Y-%m-%dT%H:%M:%S%Z")
+      date: $(Get-Date -Format o)
 
 # List of Specs
 specs:
@@ -151,7 +151,7 @@ env:
   AUTHOR: 'alajmo'
 
 # Shell command substitution
-DATE: $(date -u +"%Y-%m-%dT%H:%M:%S%Z")
+DATE: $(Get-Date -Format o)
 
 # List of tasks
 tasks:
@@ -173,7 +173,7 @@ tasks:
     theme: default
 
     # Shell interpreter
-    shell: bash
+    shell: pwsh
 
 # List of themes
 # Styling Options:
@@ -340,11 +340,7 @@ themes:
 
 When running a command, `mani` will check the current directory and all parent directories for the following files: `mani.yaml`, `mani.yml`, `.mani.yaml`, `.mani.yml` .
 
-Additionally, it will import (if found) a config file from:
-
-- Linux: `$XDG_CONFIG_HOME/mani/config.yaml` or `$HOME/.config/mani/config.yaml` if `$XDG_CONFIG_HOME` is not set.
-- Darwin: `$HOME/Library/Application Support/mani/config.yaml`
-- Windows: `%AppData%\mani`
+Additionally, it will import (if found) a user config file from `%AppData%\mani\config.yaml`.
 
 Both the config and user config can be specified via flags or environments variables.
 

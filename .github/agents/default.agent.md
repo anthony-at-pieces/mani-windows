@@ -29,13 +29,17 @@ mani/
 ├── test/             # Test fixtures and integration tests
 │   ├── fixtures/     # Test data
 │   ├── integration/  # Integration test files
-│   └── scripts/      # Test scripts
 └── main.go           # Entry point
 ```
 
 ## Development Commands
 
-Build commands can be found in Makefile.
+```powershell
+.\scripts\build.ps1
+.\scripts\test.ps1
+.\scripts\package.ps1 -Version dev
+go test ./...
+```
 
 ## Coding Standards
 
@@ -94,16 +98,15 @@ When fixing a bug:
    - Verify the fix doesn't break existing functionality
 
 3. **Verification**:
-   - Run `make test-unit` to ensure all tests pass
-   - Run `make lint` to check code quality
+   - Run `.\scripts\test.ps1` to ensure all tests pass
+   - Run `golangci-lint run ./...` to check code quality
    - Test manually with real scenarios
 
 ## Platform Considerations
 
-- **Windows support**: The code handles Windows-specific shell behavior
-  - Default shell on Windows is `powershell -NoProfile`
-  - Default shell on Unix is `bash -c`
-- **Cross-platform paths**: Use `filepath.Join()` for paths
+- **Windows support**: This fork targets Windows only
+  - Default shell is `powershell -NoProfile -Command`
+  - Use `filepath.Join()` for filesystem paths
 
 ## Key Dependencies
 
@@ -119,7 +122,7 @@ The main configuration file is `mani.yaml`:
 
 ```yaml
 # Global settings
-shell: bash -c
+shell: powershell -NoProfile -Command
 sync_remotes: false
 sync_gitignore: true
 
@@ -149,7 +152,7 @@ tasks:
 
 1. Reference the issue number if one exists
 2. Provide a clear description of changes
-3. Ensure all tests pass (`make test`)
-4. Ensure code is formatted (`make gofmt`)
-5. Ensure linter passes (`make lint`)
+3. Ensure all tests pass (`.\scripts\test.ps1`)
+4. Ensure code is formatted (`gofmt`)
+5. Ensure linter passes (`golangci-lint run ./...`)
 6. Update documentation if needed

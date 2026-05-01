@@ -47,7 +47,7 @@ Mani is an MIT-licensed open source project with ongoing development. If you'd l
 
 ## Installation
 
-`mani` is available on Linux and Mac, with partial support for Windows.
+`mani` is available as a Windows-first CLI and TUI for PowerShell users.
 
 <details>
 <summary><b>Binaries</b></summary>
@@ -56,51 +56,10 @@ Download from the [release](https://github.com/alajmo/mani/releases) page.
 </details>
 
 <details>
-<summary><b>cURL</b> (Linux & macOS)</summary>
-
-```sh
-curl -sfL https://raw.githubusercontent.com/alajmo/mani/main/install.sh | sh
-```
-</details>
-
-<details>
-<summary><b>Homebrew</b></summary>
-
-```sh
-brew tap alajmo/mani
-brew install mani
-```
-</details>
-
-<details>
-<summary><b>MacPorts</b></summary>
-
-```sh
-sudo port install mani
-```
-</details>
-
-<details>
-<summary><b>Arch</b> (AUR)</summary>
-
-```sh
-yay -S mani
-```
-</details>
-
-<details>
-<summary><b>Nix</b></summary>
-
-```sh
-nix-env -iA nixos.mani
-```
-</details>
-
-<details>
 <summary><b>Go</b></summary>
 
-```sh
-go get -u github.com/alajmo/mani
+```powershell
+go install github.com/alajmo/mani@latest
 ```
 </details>
 
@@ -109,12 +68,14 @@ go get -u github.com/alajmo/mani
 
 1. Clone the repo
 2. Build and run the executable
-    ```sh
-    make build && ./dist/mani
+
+    ```powershell
+    .\scripts\build.ps1
+    .\dist\mani.exe --help
     ```
 </details>
 
-Auto-completion is available via `mani completion bash|zsh|fish|powershell` and man page via `mani gen`.
+Auto-completion is available via `mani completion powershell`.
 
 ## Usage
 
@@ -122,7 +83,7 @@ Auto-completion is available via `mani completion bash|zsh|fish|powershell` and 
 
 Run the following command inside a directory containing your `git` repositories:
 
-```sh
+```powershell
 mani init
 ```
 
@@ -135,7 +96,7 @@ It can be helpful to initialize the `mani` repository as a git repository so tha
 
 ### Example Commands
 
-```bash
+```powershell
 # List all projects
 mani list projects
 

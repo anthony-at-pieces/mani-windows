@@ -169,35 +169,38 @@ func ResolveTildePath(path string) (string, error) {
 	return p, nil
 }
 
-// FormatShell returns the shell program and associated command flag
+// FormatShell returns the shell program and associated command flag.
 func FormatShell(shell string) string {
-	s := strings.Split(shell, " ")
+	s := strings.Fields(shell)
+	shellName := strings.ToLower(shell)
 
-	if len(s) > 1 { // User provides correct flag, bash -c, /bin/bash -c, /bin/sh -c
+	if len(s) > 1 {
 		return shell
-	} else if strings.Contains(shell, "bash") { // bash, /bin/bash
-		return shell + " -c"
-	} else if strings.Contains(shell, "zsh") { // zsh, /bin/zsh
-		return shell + " -c"
-	} else if strings.Contains(shell, "sh") { // sh, /bin/sh
-		return shell + " -c"
-	} else if strings.Contains(shell, "node") { // node, /bin/node
+	} else if strings.Contains(shellName, "powershell") { // powershell
+		return shell + " -NoProfile -Command"
+	} else if strings.Contains(shellName, "pwsh") { // pwsh
+		return shell + " -NoProfile -Command"
+	} else if shellName == "cmd" || strings.HasSuffix(shellName, "cmd.exe") { // cmd
+		return shell + " /C"
+	} else if strings.Contains(shellName, "node") { // node, /bin/node
 		return shell + " -e"
-	} else if strings.Contains(shell, "python") { // python, /bin/python
+	} else if strings.Contains(shellName, "python") { // python, /bin/python
 		return shell + " -c"
 	}
-	// TODO: Add fish and other shells
 
 	return shell
 }
 
-// FormatShellString returns the shell program (bash,sh,.etc) along with the
-// command flag and subsequent commands
+// FormatShellString returns the shell program along with command flags and command text.
 // Example:
-// "bash", "-c echo hello world"
+// "powershell", "-NoProfile -Command Write-Output hello"
 func FormatShellString(shell string, command string) (string, []string) {
 	shellProgram := FormatShell(shell)
-	args := strings.SplitN(shellProgram, " ", 2)
+	args := strings.Fields(shellProgram)
+	if len(args) == 0 {
+		return shell, []string{command}
+	}
+
 	return args[0], append(args[1:], command)
 }
 

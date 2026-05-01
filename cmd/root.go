@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"runtime"
 
 	"github.com/spf13/cobra"
 
@@ -21,7 +20,6 @@ var (
 	configFilepath string
 	userConfigPath string
 	color          bool
-	buildMode      = ""
 	version        = "dev"
 	commit         = "none"
 	date           = "n/a"
@@ -40,12 +38,6 @@ func Execute() {
 }
 
 func init() {
-	// Modify default shell in-case we're on windows
-	if runtime.GOOS == "windows" {
-		dao.DEFAULT_SHELL = "powershell -NoProfile"
-		dao.DEFAULT_SHELL_PROGRAM = "powershell"
-	}
-
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVarP(&configFilepath, "config", "c", "", "specify config")
@@ -54,7 +46,6 @@ func init() {
 
 	rootCmd.AddCommand(
 		completionCmd(),
-		genCmd(),
 		initCmd(),
 		execCmd(&config, &configErr),
 		runCmd(&config, &configErr),
@@ -74,10 +65,6 @@ func init() {
 Documentation: https://manicli.com
 Issues:        https://github.com/alajmo/mani/issues
 `)
-
-	if buildMode == "man" {
-		rootCmd.AddCommand(genDocsCmd("manage multiple repositories and run commands across them"))
-	}
 
 	rootCmd.DisableAutoGenTag = true
 }

@@ -5,6 +5,7 @@ import (
 	"container/list"
 	"fmt"
 	"os"
+	pathpkg "path"
 	"path/filepath"
 	"regexp"
 	"slices"
@@ -368,6 +369,9 @@ func (c Config) GetProjectsByPath(dirs []string) ([]Project, error) {
 		for _, dir := range dirs {
 
 			matchPath := func(dir string, path string) (bool, error) {
+				dir = filepath.ToSlash(dir)
+				path = filepath.ToSlash(path)
+
 				// Handle glob pattern
 				if strings.Contains(dir, "*") {
 					// Handle '**' glob pattern
@@ -391,7 +395,7 @@ func (c Config) GetProjectsByPath(dirs []string) ([]Project, error) {
 					}
 
 					// Handle standard glob pattern
-					matched, err := filepath.Match(dir, path)
+					matched, err := pathpkg.Match(dir, path)
 
 					if err != nil {
 						return false, err
@@ -888,7 +892,7 @@ type TreeNode struct {
 // node: Node containing path and name information to be added
 func AddToTree(root []TreeNode, node TNode) []TreeNode {
 	// Return if path is empty or starts with separator
-	items := strings.Split(node.Path, string(os.PathSeparator))
+	items := strings.Split(filepath.ToSlash(node.Path), "/")
 	if len(items) == 0 || items[0] == "" {
 		return root
 	}

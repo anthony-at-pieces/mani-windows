@@ -5,5 +5,5 @@ projects:
   template-generator:
     path: ../template-generator
     url: git@github.com:alajmo/template-generator
-    tags: [cli,bash]
+    tags: [cli,powershell]
 

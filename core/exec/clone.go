@@ -263,8 +263,7 @@ func CloneRepos(config *dao.Config, projects []dao.Project, syncFlags core.SyncF
 
 		if syncProjects[i].Clone != "" {
 			shell = dao.DEFAULT_SHELL
-			shellProgram = dao.DEFAULT_SHELL_PROGRAM
-			cmdArr = []string{"-c", syncProjects[i].Clone}
+			shellProgram, cmdArr = core.FormatShellString(shell, syncProjects[i].Clone)
 			cmd = syncProjects[i].Clone
 		} else {
 			projectPath, err := core.GetAbsolutePath(config.Path, syncProjects[i].Path, syncProjects[i].Name)

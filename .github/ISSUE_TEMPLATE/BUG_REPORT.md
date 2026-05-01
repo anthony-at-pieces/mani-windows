@@ -12,16 +12,11 @@ assignees: ''
 ## Info
 
 - OS
-  - [ ] Linux
-  - [ ] Mac OS X
   - [ ] Windows
-  - [ ] other
 
 - Shell
-  - [ ] Bash
-  - [ ] Zsh
-  - [ ] Fish
-  - [ ] Powershell
+  - [ ] Windows PowerShell
+  - [ ] PowerShell 7 (`pwsh`)
   - [ ] other
 
 <!-- run `mani --version` -->

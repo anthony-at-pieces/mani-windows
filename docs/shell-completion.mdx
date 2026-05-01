@@ -1,50 +1,15 @@
 # Shell Completion
 
-Shell completion is available for `bash`, `zsh`, `fish` and `powershell`.
+Shell completion is available for PowerShell.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs
-    defaultValue="bash"
-    values={[
-        { label: 'bash', value: 'bash', },
-        { label: 'zsh', value: 'zsh', },
-        { label: 'fish', value: 'fish', },
-        { label: 'powershell', value: 'powershell', },
-    ]}
->
-
-<TabItem value="bash">
-
-```bash
-mani completion bash
+```powershell
+mani completion powershell | Out-String | Invoke-Expression
 ```
 
-</TabItem>
+To load completions for every new PowerShell session:
 
-<TabItem value='zsh'>
-
-```bash
-mani completion zsh
+```powershell
+mani completion powershell > mani.ps1
 ```
 
-</TabItem>
-
-<TabItem value='fish'>
-
-```bash
-mani completion fish
-```
-
-</TabItem>
-
-<TabItem value='powershell'>
-
-```bash
-mani completion powershell
-```
-
-</TabItem>
-
-</Tabs>
+Then source `mani.ps1` from your PowerShell profile.

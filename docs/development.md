@@ -5,38 +5,35 @@
 ### Prerequisites
 
 - [go 1.25 or above](https://golang.org/doc/install)
-- [goreleaser](https://goreleaser.com/install/)
+- Git
 
 ### Building
 
-```bash
+```powershell
 # Build mani for your platform target
-make build
+.\scripts\build.ps1
 
-# Build mani binaries and archives for all platforms using goreleaser
-make build-all
+# Run unit, integration, and smoke tests
+.\scripts\test.ps1
 
-# Generate Manpage
-make gen-man
+# Create a Windows ZIP package
+.\scripts\package.ps1 -Version dev
 ```
 
 ## Developing
 
-```bash
+```powershell
 # Format code
-make gofmt
+gofmt -w .\cmd .\core .\test\integration
 
 # Manage dependencies (download/remove unused)
-make tidy
+go mod tidy
 
 # Lint code
-make lint
+golangci-lint run ./...
 
-# Build mani and get an interactive docker shell with completion
-make build-exec
-
-# Standing in _example directory you can run the following to debug faster
-(cd .. && make build-and-link && cd - && ../dist/mani run multi -p template-generator)
+# Debug completion
+.\dist\mani.exe __complete list tags --projects ""
 ```
 
 ## Releasing
@@ -44,25 +41,10 @@ make build-exec
 The following workflow is used for releasing a new `mani` version:
 
 1. Create pull request with changes
-2. Verify build works (especially windows build)
-   - `make build`
-   - `make build-all`
+2. Verify the Windows build works
+   - `.\scripts\build.ps1`
 3. Pass all integration and unit tests locally
-   - `make test-unit`
-   - `make test-integration`
-4. Update `config.man` and `config.md` if any config changes and generate manpage
-   - `make gen-man`
-5. Update `Makefile` and `CHANGELOG.md` with correct version, and add all changes to `CHANGELOG.md`
-6. Squash-merge to main with `Release vx.y.z` and description of changes
-7. Run `make release`, which will:
-   - Create a git tag with release notes
-   - Trigger a build in Github that builds cross-platform binaries and generates release notes of changes between current and previous tag
-
-## Dependency Graph
-
-Create SVG dependency graphs using graphviz and [goda](https://github.com/loov/goda)
-
-```bash
-goda graph "github.com/alajmo/mani/..." | dot -Tsvg -o res/graph.svg
-goda graph "github.com/alajmo/mani:all" | dot -Tsvg -o res/graph-full.svg
-```
+   - `.\scripts\test.ps1`
+4. Update docs if any config or command behavior changes
+5. Update `CHANGELOG.md` with the release notes
+6. Tag the release with `vX.Y.Z`; GitHub Actions packages `mani.exe` into a Windows ZIP archive

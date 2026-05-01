@@ -40,7 +40,7 @@ If you wish to continue task execution even if an error is encountered, use the 
 
   ```bash
   $ mani run task-1 --all
-    error: path `/home/test/project-1` does not exist
+    error: path `C:\work\project-1` does not exist
   ```
 
 - `ignore-unreachable` set to true

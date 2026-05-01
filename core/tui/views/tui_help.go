@@ -8,7 +8,7 @@ import (
 	"github.com/rivo/tview"
 )
 
-var Version = "v0.31.2"
+var Version = "dev"
 
 func ShowHelpModal() {
 	t, table := createShortcutsTable()

@@ -30,8 +30,8 @@ type Command struct {
 	EnvList []string  `yaml:"-"`
 
 	// Internal
-	ShellProgram string   `yaml:"-"` // should be in the format: <program>, example: "sh", "node"
-	CmdArg       []string `yaml:"-"` // is in the format ["-c echo hello world"] or ["-c", "echo hello world"], it includes the shell flag
+	ShellProgram string   `yaml:"-"` // should be in the format: <program>, example: "powershell", "node"
+	CmdArg       []string `yaml:"-"` // includes shell flags plus the command text
 }
 
 type Task struct {
@@ -53,8 +53,8 @@ type Task struct {
 	Theme  yaml.Node `yaml:"theme"`
 
 	// Internal
-	ShellProgram string   `yaml:"-"` // should be in the format: <program>, example: "sh", "node"
-	CmdArg       []string `yaml:"-"` // is in the format ["-c echo hello world"] or ["-c", "echo hello world"], it includes the shell flag
+	ShellProgram string   `yaml:"-"` // should be in the format: <program>, example: "powershell", "node"
+	CmdArg       []string `yaml:"-"` // includes shell flags plus the command text
 	context      string
 	contextLine  int
 }

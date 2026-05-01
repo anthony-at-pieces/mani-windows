@@ -1,8 +1,0 @@
-Index: 0
-Name: List 0 projects
-WantErr: false
-Cmd:
-mani list projects
-
----
-No matching projects found

@@ -14,8 +14,8 @@ import (
 )
 
 var (
-	DEFAULT_SHELL         = "bash -c"
-	DEFAULT_SHELL_PROGRAM = "bash"
+	DEFAULT_SHELL         = "powershell -NoProfile -Command"
+	DEFAULT_SHELL_PROGRAM = "powershell"
 	ACCEPTABLE_FILE_NAMES = []string{"mani.yaml", "mani.yml", ".mani.yaml", ".mani.yml"}
 
 	DEFAULT_THEME = Theme{
@@ -290,6 +290,9 @@ func (c Config) EditConfig() error {
 
 func openEditor(path string, lineNr int) error {
 	editor := os.Getenv("EDITOR")
+	if editor == "" {
+		editor = "notepad"
+	}
 	var args []string
 
 	if lineNr > 0 {

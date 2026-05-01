@@ -125,7 +125,7 @@ func (exec *Exec) TableWork(rIndex int, dryRun bool, data dao.TableOutput, dataM
 		}
 
 		if cmd.TTY {
-			return ExecTTY(cmd.Cmd, cmd.EnvList)
+			return ExecTTY(cmd.ShellProgram, cmd.CmdArg, cmd.EnvList)
 		}
 
 		err := RunTableCmd(args, data, dataMutex, &wg)
@@ -147,7 +147,7 @@ func (exec *Exec) TableWork(rIndex int, dryRun bool, data dao.TableOutput, dataM
 		}
 
 		if task.TTY {
-			return ExecTTY(task.Cmd, task.EnvList)
+			return ExecTTY(task.ShellProgram, task.CmdArg, task.EnvList)
 		}
 
 		err := RunTableCmd(args, data, dataMutex, &wg)

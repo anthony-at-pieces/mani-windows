@@ -25,8 +25,8 @@ projects:
 
   template-generator:
     url: https://github.com/alajmo/template-generator.git
-    desc: A simple bash script used to manage boilerplates
-    tags: [cli, bash]
+    desc: A simple PowerShell script used to manage boilerplates
+    tags: [cli, powershell]
     env:
       branch: dev
 
@@ -62,8 +62,8 @@ tasks:
   git-last-commit-date:
     desc: show last commit date
     cmd: |
-      git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" \
-      | sed 's/ //'
+      git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" |
+        ForEach-Object { $_ -replace ' ', '' }
 
   git-branch:
     desc: show current git branch
@@ -98,7 +98,7 @@ $ mani list projects
  example            |                     | A mani example
  pinto              | frontend, node      | A vim theme editor
  dashgrid           | frontend, lib, node | A highly customizable drag-and-drop grid
- template-generator | cli, bash           | A simple bash script used to manage boilerplates
+ template-generator | cli, powershell     | A simple PowerShell script used to manage boilerplates
 
 $ mani list projects --tree
 ┌─ frontend

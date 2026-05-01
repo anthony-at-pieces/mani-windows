@@ -2,8 +2,6 @@
 *.exe
 *.exe~
 *.dll
-*.so
-*.dylib
 
 # Test binary, built with `go test -c`
 *.test
@@ -15,10 +13,7 @@
 vendor/
 
 dist
-target
-test/tmp
 examples/frontend
-release-changelog.md
 
 .netlify
 .tags

@@ -83,7 +83,7 @@ func (exec *Exec) TextWork(
 		}
 
 		if cmd.TTY {
-			return ExecTTY(cmd.Cmd, cmd.EnvList)
+			return ExecTTY(cmd.ShellProgram, cmd.CmdArg, cmd.EnvList)
 		}
 
 		err := RunTextCmd(args, task.ThemeData.Stream, prefix, task.SpecData.Parallel, &wg, stdout, stderr)
@@ -108,7 +108,7 @@ func (exec *Exec) TextWork(
 		}
 
 		if task.TTY {
-			return ExecTTY(task.Cmd, task.EnvList)
+			return ExecTTY(task.ShellProgram, task.CmdArg, task.EnvList)
 		}
 
 		err := RunTextCmd(args, task.ThemeData.Stream, prefix, task.SpecData.Parallel, &wg, stdout, stderr)

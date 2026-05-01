@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
@@ -18,15 +18,13 @@ jobs:
         with:
           go-version: "1.25.5"
 
-      - name: Create release notes
-        run: ./scripts/release.sh
+      - name: Package
+        shell: pwsh
+        run: .\scripts\package.ps1 -Version "${{ github.ref_name }}"
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
         with:
-          distribution: goreleaser
-          version: latest
-          args: release --release-notes=release-changelog.md
+          files: dist/mani-${{ github.ref_name }}-windows-amd64.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.GH_PAT }}

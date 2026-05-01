@@ -34,8 +34,8 @@ projects:
 
   template-generator:
     url: https://github.com/alajmo/template-generator.git
-    desc: A simple bash script used to manage boilerplates
-    tags: [cli, bash]
+    desc: A simple PowerShell script used to manage boilerplates
+    tags: [cli, powershell]
     env:
       branch: dev
 
@@ -50,12 +50,12 @@ tasks:
       output: text
     env:
       branch: main
-    cmd: git checkout -b $branch
+    cmd: git checkout -b $env:branch
 ```
 
 Run `mani sync` to clone the repositories:
 
-```bash
+```powershell
 $ mani sync
 ✓ pinto
 ✓ dashgrid
@@ -65,7 +65,7 @@ All projects synced
 
 Then run commands across all or a subset of the repositories:
 
-```bash
+```powershell
 # Target repositories that have the tag 'node'
 $ mani run git-status --tags node
 

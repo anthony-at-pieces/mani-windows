@@ -1,8 +1,0 @@
-Index: 2
-Name: Describe 0 projects on 2 non-matching tags
-WantErr: false
-Cmd:
-mani describe projects --tags frontend,cli
-
----
-No matching projects found

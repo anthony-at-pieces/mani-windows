@@ -78,7 +78,8 @@ func EvaluateEnv(envList []string) ([]string, error) {
 
 		if val, hasPrefix := strings.CutPrefix(kv[1], "$("); hasPrefix {
 			if cmdStr, hasSuffix := strings.CutSuffix(val, ")"); hasSuffix {
-				cmd := exec.Command("sh", "-c", cmdStr)
+				shell, args := core.FormatShellString(DEFAULT_SHELL, cmdStr)
+				cmd := exec.Command(shell, args...)
 				cmd.Env = os.Environ()
 				out, err := cmd.CombinedOutput()
 				if err != nil {

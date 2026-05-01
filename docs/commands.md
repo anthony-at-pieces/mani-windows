@@ -105,10 +105,10 @@ exec <command> [flags]
 
 ```
   # List files in all projects
-  mani exec --all ls
+  mani exec --all Get-ChildItem
 
   # List git files with markdown suffix in all projects
-  mani exec --all 'git ls-files | grep -e ".md"'
+  mani exec --all 'git ls-files | Select-String ".md"'
 ```
 
 ### Options
@@ -568,20 +568,5 @@ check [flags]
 
 ```
   -h, --help   help for check
-```
-
-## gen
-
-Generate man page
-
-```
-gen
-```
-
-### Options
-
-```
-  -d, --dir string   directory to save manpage to (default "./")
-  -h, --help         help for gen
 ```
 
